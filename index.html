@@ -47,15 +47,15 @@ main{max-width:1160px;margin:auto;padding:18px 24px 60px}
 /* ── ตัวกรอง: แถบเดียว กลุ่มเป็นปุ่มสลับ + ช่องค้นหา ── */
 .bar{display:flex;gap:10px;align-items:center;margin-bottom:24px;position:sticky;top:8px;z-index:5;
   background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 6px 20px rgba(17,24,39,.06)}
-.chips{display:flex;gap:2px;background:var(--surface-2);border-radius:11px;padding:3px}
-.chip{border:0;background:transparent;border-radius:9px;padding:7px 14px;font-weight:700;font-size:14px;color:var(--ink-2);min-height:38px;white-space:nowrap}
+.chips{display:flex;gap:2px;background:#F1F2F4;border-radius:11px;padding:3px;flex:none}
+.chip{border:0;background:transparent;border-radius:9px;padding:7px 16px;font-weight:700;font-size:14px;color:var(--ink-2);min-height:38px;white-space:nowrap}
 .chip.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(17,24,39,.12)}
 .chip em{font-style:normal;font-weight:700;font-size:12px;color:var(--muted);margin-left:5px}
 .chip.on em{color:var(--orange)}
-.search{margin-left:auto;flex:1 1 220px;max-width:360px;position:relative}
-.search input{width:100%;border:0;background:transparent;border-radius:10px;padding:9px 12px 9px 36px;font:inherit;font-size:14.5px;color:var(--ink);outline:none;min-height:38px}
-.search input:focus{background:var(--surface-2)}
-.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--muted);fill:none;stroke-width:2}
+.search{flex:1 1 220px;position:relative}
+.search input{width:100%;border:1px solid transparent;background:#F1F2F4;border-radius:11px;padding:9px 14px 9px 38px;font:inherit;font-size:14.5px;color:var(--ink);outline:none;min-height:44px}
+.search input:focus{background:#fff;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--muted);fill:none;stroke-width:2}
 
 /* ── หัวแต่ละส่วน ── */
 .sec{margin:0 0 30px}
@@ -144,7 +144,7 @@ main{max-width:1160px;margin:auto;padding:18px 24px 60px}
   .chips{width:100%;overflow-x:auto;scrollbar-width:none}
   .chips::-webkit-scrollbar{display:none}
   .chip{flex:1 0 auto}
-  .search{max-width:none;margin-left:0;flex:1 1 100%}
+  .search{flex:1 1 100%}
   .ups{grid-template-columns:1fr}
   .up{padding:14px;gap:12px}
   .cal{width:64px}.cal b{font-size:26px}
