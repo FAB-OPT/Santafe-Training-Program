@@ -10,15 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ════════ ปฏิทินอบรม Santa Fe ════════
-   โทนเรียบ: พื้นเทาอ่อน · การ์ดขาว · ตัวหนังสือเทาเข้ม · ส้ม Santa Fe ใช้แค่จุดเน้นเล็ก ๆ · ฟอนต์ Sarabun
+   พื้นหลังเทาอ่อนเรียบ · ส้ม Santa Fe · ตัวหนังสือน้ำตาลเข้ม · ฟอนต์ Sarabun (เดียวกับระบบอื่นในฮับ)
    ข้อมูลอ่านจาก Google Sheet (ชีต1) เหมือนเดิม แก้ข้อมูลที่ชีต ไม่ต้องแก้หน้านี้ */
 :root{
-  --bg:#F5F6F8; --surface:#FFFFFF; --surface-2:#F2F3F5; --line:#E5E7EB; --line-2:#D8DBE0;
-  --ink:#1F2328; --ink-2:#4B5563; --muted:#6B7280;
-  --orange:#E8641B; --orange-2:#E8641B; --orange-soft:#FDF1E9; --orange-ink:#B4501A;
-  --green:#2F7A52; --green-soft:#EDF6F1; --amber:#8A6A1F; --amber-soft:#F8F3E6;
-  --red:#A63A2F; --red-soft:#F9EEEC; --gray-soft:#F2F3F5;
-  --shadow:0 1px 2px rgba(17,24,39,.04);
+  --bg:#F5F6F8; --surface:#FFFFFF; --surface-2:#F6EEE3; --line:#EADFCF; --line-2:#DCCDB8;
+  --ink:#2A1D14; --ink-2:#5B4636; --muted:#8C7765;
+  --orange:#F26B1D; --orange-2:#FF8A3D; --orange-soft:#FFEBDD; --orange-ink:#B8470B;
+  --green:#1E7B4A; --green-soft:#E6F4EC; --amber:#9A6700; --amber-soft:#FFF4D6;
+  --red:#B42318; --red-soft:#FDECEA; --gray-soft:#F1ECE5;
+  --shadow:0 1px 2px rgba(42,29,20,.05),0 10px 28px rgba(42,29,20,.07);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -29,7 +29,7 @@ button{font:inherit;cursor:pointer}
 /* ── หัวหน้า ── */
 .top{background:var(--surface);border-bottom:1px solid var(--line)}
 .top-in{max-width:1160px;margin:auto;padding:22px 24px 20px;display:flex;align-items:center;gap:22px}
-.top img{height:64px;width:auto;display:block}
+.top img{height:92px;width:auto;display:block}
 .top h1{margin:0;font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.01em;line-height:1.25}
 .top h1 small{display:block;font-size:13.5px;font-weight:600;color:var(--muted);letter-spacing:0;margin-top:2px}
 .top .ver{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 12px;white-space:nowrap;align-self:flex-start}
@@ -41,7 +41,7 @@ main{max-width:1160px;margin:auto;padding:22px 24px 60px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
 .stat b{display:block;font-size:28px;line-height:1.1;font-weight:800;font-variant-numeric:tabular-nums}
 .stat span{display:block;font-size:13px;color:var(--muted);font-weight:600;margin-top:4px}
-.stat.s-up b{color:var(--orange)}
+.stat.s-up b{color:var(--orange)} .stat.s-done b{color:var(--green)}
 
 /* ── ตัวกรอง ── */
 .bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:26px;position:sticky;top:0;z-index:5;padding:10px 0;background:linear-gradient(var(--bg) 80%,rgba(245,246,248,0))}
@@ -51,7 +51,7 @@ main{max-width:1160px;margin:auto;padding:22px 24px 60px}
 .chip em{font-style:normal;font-weight:600;opacity:.65;margin-left:4px}
 .search{margin-left:auto;flex:1 1 240px;max-width:340px;position:relative}
 .search input{width:100%;border:1px solid var(--line-2);background:var(--surface);border-radius:999px;padding:9px 16px 9px 38px;font:inherit;font-size:14.5px;color:var(--ink);outline:none;min-height:40px}
-.search input:focus{border-color:var(--ink-2);box-shadow:0 0 0 3px rgba(75,85,99,.12)}
+.search input:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-soft)}
 .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--muted);fill:none;stroke-width:2}
 
 /* ── หัวแต่ละส่วน ── */
@@ -64,24 +64,24 @@ main{max-width:1160px;margin:auto;padding:22px 24px 60px}
 .ups{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
 .up{display:flex;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
 .cal{flex:none;width:78px;border-radius:14px;overflow:hidden;text-align:center;border:1px solid var(--line-2);background:var(--surface);align-self:flex-start}
-.cal i{display:block;font-style:normal;background:var(--ink);color:#fff;font-size:12.5px;font-weight:700;padding:3px 0}
+.cal i{display:block;font-style:normal;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;padding:3px 0}
 .cal b{display:block;font-size:32px;font-weight:800;line-height:1.15;padding-top:4px;font-variant-numeric:tabular-nums}
 .cal small{display:block;font-size:11.5px;color:var(--muted);font-weight:700;padding-bottom:6px}
 .up-b{flex:1;min-width:0;display:flex;flex-direction:column}
-.cd{align-self:flex-start;font-size:13px;font-weight:800;color:var(--orange-ink)}
-.cd.today{color:var(--orange)}
+.cd{align-self:flex-start;font-size:12.5px;font-weight:800;color:var(--orange-ink);background:var(--orange-soft);border-radius:999px;padding:2px 10px}
+.cd.today{background:var(--orange);color:#fff}
 .up h3{margin:6px 0 2px;font-size:16.5px;line-height:1.4;font-weight:800}
 .meta{font-size:13.5px;color:var(--ink-2)}
 .meta span+span::before{content:" · ";color:var(--muted)}
 .grp{display:inline-block;font-size:11.5px;font-weight:800;border-radius:6px;padding:1px 8px;background:var(--gray-soft);color:var(--ink-2);margin-right:6px;vertical-align:1px}
-.grp.tm,.grp.st{background:var(--gray-soft);color:var(--ink-2)}
+.grp.tm{background:#EAF0FB;color:#2F4E8C}
+.grp.st{background:#FCEFE6;color:#9A4A12}
 .dl{margin-top:auto;padding-top:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:9px 16px;font-weight:800;font-size:14px;text-decoration:none;min-height:42px;border:1px solid transparent}
 .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.btn-pri{background:var(--ink);color:#fff}
-.btn-pri:hover{background:#343A42}
+.btn-pri{background:linear-gradient(135deg,var(--orange-2),var(--orange));color:#fff;box-shadow:0 4px 14px rgba(242,107,29,.28)}
 .btn-line{background:var(--surface);border-color:var(--line-2);color:var(--ink)}
-.btn-line:hover{border-color:var(--ink-2);background:var(--surface-2)}
+.btn-line:hover{border-color:var(--orange);color:var(--orange-ink)}
 
 /* ── อบรมแล้ว: ไทม์ไลน์รายเดือน ── */
 .month{margin-bottom:18px}
@@ -118,7 +118,7 @@ main{max-width:1160px;margin:auto;padding:22px 24px 60px}
 /* ── มือถือ ── */
 @media(max-width:720px){
   .top-in{padding:14px 16px;gap:14px}
-  .top img{height:44px}
+  .top img{height:60px}
   .top .ver{display:none}
   main{padding:14px 12px 40px}
   .stats{grid-template-columns:repeat(2,1fr);gap:8px}
