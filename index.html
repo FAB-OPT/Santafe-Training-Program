@@ -28,7 +28,7 @@ button{font:inherit;cursor:pointer}
 
 /* ── หัวหน้า: โลโก้ | ชื่อ · แถบตัวเลขอยู่ในหัวเดียวกัน ── */
 .top{background:var(--surface);border-bottom:1px solid var(--line)}
-.top-in{max-width:1160px;margin:auto;padding:12px 24px 0}
+.top-in{padding:12px clamp(16px,3vw,48px) 0}
 .brand{display:flex;align-items:center;gap:18px}
 .brand img{height:62px;width:auto;display:block;flex:none}
 .brand .sep{width:1px;align-self:stretch;background:var(--line);margin:4px 0}
@@ -43,7 +43,7 @@ button{font:inherit;cursor:pointer}
 .stat span{font-size:13.5px;color:var(--muted);font-weight:600;line-height:1.3}
 .stat.s-up b{color:var(--orange)} .stat.s-done b{color:var(--green)}
 
-main{max-width:1160px;margin:auto;padding:18px 24px 60px}
+main{padding:18px clamp(16px,3vw,48px) 60px}
 
 /* ── ตัวกรอง: แถบเดียว กลุ่มเป็นปุ่มสลับ + ช่องค้นหา ── */
 .bar{display:flex;gap:10px;align-items:center;margin-bottom:24px;position:sticky;top:8px;z-index:5;
@@ -65,7 +65,7 @@ main{max-width:1160px;margin:auto;padding:18px 24px 60px}
 .sec-h span{font-size:13.5px;color:var(--muted);font-weight:600}
 
 /* ── กำลังจะมาถึง: ใบใหญ่ + วันที่เป็นปฏิทินฉีก ── */
-.ups{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.ups{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
 .up{display:flex;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
 .cal{flex:none;width:78px;border-radius:14px;overflow:hidden;text-align:center;border:1px solid var(--line-2);background:var(--surface);align-self:flex-start}
 .cal i{display:block;font-style:normal;background:var(--orange);color:#fff;font-size:12.5px;font-weight:800;padding:3px 0}
