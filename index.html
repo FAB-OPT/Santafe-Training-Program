@@ -71,9 +71,17 @@ main{max-width:1160px;margin:auto;padding:22px 24px 60px}
 .cd{align-self:flex-start;font-size:12.5px;font-weight:800;color:var(--orange-ink);background:var(--orange-soft);border-radius:999px;padding:2px 10px}
 .cd.today{background:var(--orange);color:#fff}
 .up h3{margin:6px 0 2px;font-size:16.5px;line-height:1.4;font-weight:800}
-.meta{font-size:13.5px;color:var(--ink-2)}
-.meta span+span::before{content:" · ";color:var(--muted)}
-.grp{display:inline-block;font-size:11.5px;font-weight:800;border-radius:6px;padding:1px 8px;background:var(--gray-soft);color:var(--ink-2);margin-right:6px;vertical-align:1px}
+.tags{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.run{display:inline-flex;align-items:baseline;gap:4px;font-size:12px;font-weight:700;color:var(--ink-2);border:1px solid var(--line-2);border-radius:6px;padding:0 8px;background:var(--surface);line-height:1.6}
+.run b{font-size:13px;font-weight:800;color:var(--ink)}
+.trn{display:flex;gap:7px;align-items:flex-start;margin-top:8px;font-size:13.5px;color:var(--ink-2);line-height:1.5}
+.trn svg{flex:none;width:16px;height:16px;margin-top:2px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round}
+.trn span{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
+.trn i{font-style:normal;font-size:12px;font-weight:700;color:var(--muted)}
+.trn b{font-weight:700;color:var(--ink)}
+.line{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px}
+.line .tags,.line .trn{margin-top:4px}
+.grp{display:inline-block;font-size:11.5px;font-weight:800;border-radius:6px;padding:1px 8px;background:var(--gray-soft);color:var(--ink-2);line-height:1.7}
 .grp.tm{background:#EAF0FB;color:#2F4E8C}
 .grp.st{background:#FCEFE6;color:#9A4A12}
 .dl{margin-top:auto;padding-top:12px}
@@ -108,7 +116,7 @@ main{max-width:1160px;margin:auto;padding:22px 24px 60px}
 .plan{background:var(--surface);border:1px dashed var(--line-2);border-radius:16px;padding:14px 16px}
 .plan h4{margin:4px 0 8px;font-size:15px;font-weight:800;line-height:1.4}
 .runs{display:flex;gap:6px;flex-wrap:wrap}
-.runs span{font-size:12.5px;font-weight:700;color:var(--muted);background:var(--surface-2);border-radius:8px;padding:2px 10px}
+.runs span{font-size:12px;font-weight:700;color:var(--ink-2);border:1px dashed var(--line-2);border-radius:6px;padding:0 8px;line-height:1.7}
 
 .empty,.load{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center;color:var(--muted);font-weight:600}
 .err{background:var(--red-soft);border:1px solid #F5C9C4;color:var(--red);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:none}
@@ -229,7 +237,10 @@ function render(){
     .map(([v, n, c]) => `<button class="chip ${GROUP === v ? 'on' : ''}" data-g="${esc(v)}">${esc(n)}<em>${c}</em></button>`).join('');
 
   const dlBtn = (r, cls) => r.link ? `<a class="btn ${cls}" href="${esc(r.link)}" target="_blank" rel="noopener">${DL_ICON}ทะเบียนรายชื่อ</a>` : '';
-  const meta = r => [r.batch ? 'รุ่น ' + esc(r.batch) : '', r.trainer ? 'วิทยากร ' + esc(r.trainer) : ''].filter(Boolean).map(x => `<span>${x}</span>`).join('');
+  /* รุ่น = ป้ายตัวเลขคู่กับป้ายกลุ่ม · วิทยากร = บรรทัดของตัวเอง ชื่อทีละคน (ในชีตคั่นด้วย , ) */
+  const tags = r => `<div class="tags"><span class="grp ${grpCls(r.group)}">${esc(r.group)}</span>${r.batch ? `<span class="run">รุ่น <b>${esc(r.batch)}</b></span>` : ''}</div>`;
+  const trn = r => { const names = String(r.trainer || '').split(/\s*[,،、/]\s*/).filter(Boolean);
+    return names.length ? `<div class="trn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span><i>วิทยากร</i>${names.map(n => `<b>${esc(n)}</b>`).join('')}</span></div>` : ''; };
 
   let html = '';
   if (up.length) html += `<section class="sec"><div class="sec-h"><h2>กำลังจะมาถึง</h2><span>${up.length} รุ่น · เรียงวันใกล้สุดก่อน</span></div>
@@ -237,7 +248,7 @@ function render(){
       <div class="cal"><i>${MON_SHORT[r.date.getMonth()]}</i><b>${r.date.getDate()}</b><small>${beYear(r.date)}</small></div>
       <div class="up-b"><span class="cd ${n === 0 ? 'today' : ''}">${cdLabel(n)}</span>
         <h3>${esc(r.course)}</h3>
-        <div class="meta"><span class="grp ${grpCls(r.group)}">${esc(r.group)}</span>${meta(r)}</div>
+        ${tags(r)}${trn(r)}
         ${r.link ? `<div class="dl">${dlBtn(r, 'btn-pri')}</div>` : ''}</div>
     </article>`; }).join('')}</div></section>`;
 
@@ -249,7 +260,7 @@ function render(){
         <div class="month-h">${MON_FULL[d.getMonth()]} ${beYear(d)}</div>
         <div class="rows">${rs.map(r => `<div class="row">
           <div class="day"><b>${r.date.getDate()}</b><small>${MON_SHORT[r.date.getMonth()]}</small></div>
-          <div><h4>${esc(r.course)}</h4><div class="meta"><span class="grp ${grpCls(r.group)}">${esc(r.group)}</span>${meta(r)}</div></div>
+          <div><h4>${esc(r.course)}</h4><div class="line">${tags(r)}${trn(r)}</div></div>
           <div class="act"><span class="st ${r.kind}">${ST_LABEL[r.kind]}</span>${dlBtn(r, 'btn-line')}</div>
         </div>`).join('')}</div></div>`; }).join('')}</section>`;
   }
