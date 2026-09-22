@@ -171,7 +171,7 @@ main{padding:18px clamp(16px,3vw,48px) 60px}
       <input id="q" type="search" placeholder="ค้นหาหลักสูตร วิทยากร…" autocomplete="off"></label>
   </div>
   <div id="view"><div class="load">กำลังโหลดข้อมูล…</div></div>
-  <div class="foot">Prepared by Operations Department, FAB Food Holding · ข้อมูลอัปเดตจาก Google Sheet ทุกครั้งที่เปิดหน้า</div>
+  <div class="foot">Prepared by Operations Department, FAB Food Holding</div>
 </main>
 
 <script>
@@ -254,7 +254,7 @@ function render(){
     return names.length ? `<div class="trn"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/></svg><span><i>วิทยากร</i>${names.map(n => `<b>${esc(n)}</b>`).join('')}</span></div>` : ''; };
 
   let html = '';
-  if (up.length) html += `<section class="sec"><div class="sec-h"><h2>กำลังจะมาถึง</h2><span>${up.length} รุ่น · เรียงวันใกล้สุดก่อน</span></div>
+  if (up.length) html += `<section class="sec"><div class="sec-h"><h2>กำลังจะมาถึง</h2><span>${up.length} รุ่น</span></div>
     <div class="ups">${up.map(r => { const n = daysLeft(r.date); return `<article class="up">
       <div class="cal"><i>${MON_SHORT[r.date.getMonth()]}</i><b>${r.date.getDate()}</b><small>${beYear(r.date)}</small></div>
       <div class="up-b"><span class="cd ${n === 0 ? 'today' : ''}">${cdLabel(n)}</span>
@@ -266,7 +266,7 @@ function render(){
   if (past.length){
     const byMonth = {};
     past.forEach(r => { const k = r.date.getFullYear() * 100 + r.date.getMonth(); (byMonth[k] = byMonth[k] || []).push(r); });
-    html += `<section class="sec"><div class="sec-h"><h2>อบรมแล้ว</h2><span>${past.length} รุ่น · ล่าสุดก่อน</span></div>
+    html += `<section class="sec"><div class="sec-h"><h2>อบรมแล้ว</h2><span>${past.length} รุ่น</span></div>
       ${Object.keys(byMonth).sort((a, b) => b - a).map(k => { const rs = byMonth[k], d = rs[0].date; return `<div class="month">
         <div class="month-h">${MON_FULL[d.getMonth()]} ${beYear(d)}</div>
         <div class="rows">${rs.map(r => `<div class="row">
